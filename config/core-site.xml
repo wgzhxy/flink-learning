@@ -1,0 +1,18 @@
+<configuration>
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/Users/guangzhong.wgz/mysoft/hadoop-3.2.2/tmp</value>
+    </property>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://ns</value>
+    </property>
+    <property>
+        <name>dfs.journalnode.edits.dir</name>
+        <value>/Users/guangzhong.wgz/mysoft/hadoop-3.2.2/journal</value>
+    </property>
+    <property>
+        <name>ha.zookeeper.quorum</name>
+        <value>hadoop0:2181,hadoop1:2182,hadoop2:2183</value>
+    </property>
+</configuration>

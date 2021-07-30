@@ -17,7 +17,7 @@ public class Main {
         data.print();
 
         //两种格式都行，另外还支持写入到 hdfs
-//        data.writeAsText("file:///usr/local/blink-1.5.1/README1.txt");
+        // data.writeAsText("file:///usr/local/blink-1.5.1/README1.txt");
         data.writeAsText("/usr/local/blink-1.5.1/README1.txt");
 
         env.execute();

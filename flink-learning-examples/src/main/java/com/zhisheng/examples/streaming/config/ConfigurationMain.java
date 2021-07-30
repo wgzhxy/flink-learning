@@ -20,29 +20,27 @@ public class ConfigurationMain {
         Configuration configuration = new Configuration();
         configuration.setString("name", "zhisheng");
 
-        env.fromElements(WORDS)
-                .flatMap(new RichFlatMapFunction<String, Tuple2<String, Integer>>() {
+        env.fromElements(WORDS).flatMap(new RichFlatMapFunction<String, Tuple2<String, Integer>>() {
 
-                    String name;
+            String name;
 
-                    @Override
-                    public void open(Configuration parameters) throws Exception {
-                        name = parameters.getString("name", "");
-                        super.open(parameters);
+            @Override
+            public void open(Configuration parameters) throws Exception {
+                name = parameters.getString("name", "");
+                super.open(parameters);
+            }
+
+            @Override
+            public void flatMap(String value, Collector<Tuple2<String, Integer>> out) throws Exception {
+                String[] splits = value.toLowerCase().split("\\W+");
+
+                for (String split : splits) {
+                    if (split.length() > 0) {
+                        out.collect(new Tuple2<>(split + name, 1));
                     }
-
-                    @Override
-                    public void flatMap(String value, Collector<Tuple2<String, Integer>> out) throws Exception {
-                        String[] splits = value.toLowerCase().split("\\W+");
-
-                        for (String split : splits) {
-                            if (split.length() > 0) {
-                                out.collect(new Tuple2<>(split + name, 1));
-                            }
-                        }
-                    }
-                }).withParameters(configuration)
-                .print();
+                }
+            }
+        }).withParameters(configuration).print();
     }
 
     private static final String[] WORDS = new String[]{
