@@ -7,11 +7,11 @@ import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer011;
+import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.flink.table.api.DataTypes;
 import org.apache.flink.table.api.EnvironmentSettings;
 import org.apache.flink.table.api.Table;
-import org.apache.flink.table.api.java.StreamTableEnvironment;
+import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 import org.apache.flink.table.sinks.RetractStreamTableSink;
 import org.apache.flink.table.types.DataType;
 import org.apache.flink.types.Row;
@@ -36,7 +36,7 @@ public class KafkaSourceMain {
 
         ParameterTool parameterTool = ExecutionEnvUtil.PARAMETER_TOOL;
         Properties properties = KafkaConfigUtil.buildKafkaProps(parameterTool);
-        DataStream<String> dataStream = blinkStreamEnv.addSource(new FlinkKafkaConsumer011<>(parameterTool.get("kafka.topic"), new SimpleStringSchema(), properties));
+        DataStream<String> dataStream = blinkStreamEnv.addSource(new FlinkKafkaConsumer<>(parameterTool.get("kafka.topic"), new SimpleStringSchema(), properties));
         Table table = blinkStreamTableEnv.fromDataStream(dataStream, "word");
         blinkStreamTableEnv.registerTable("kafkaDataStream", table);
 

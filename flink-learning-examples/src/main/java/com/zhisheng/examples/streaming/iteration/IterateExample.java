@@ -47,8 +47,7 @@ public class IterateExample {
                 .map(new InputMap())
                 .iterate(5000);
 
-        SplitStream<Tuple5<Integer, Integer, Integer, Integer, Integer>> step = it.map(new Step())
-                .split(new MySelector());
+        SplitStream<Tuple5<Integer, Integer, Integer, Integer, Integer>> step = it.map(new Step()).split(new MySelector());
 
         it.closeWith(step.select("iterate"));
 
