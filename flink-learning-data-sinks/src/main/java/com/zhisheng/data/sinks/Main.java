@@ -1,6 +1,5 @@
 package com.zhisheng.data.sinks;
 
-
 import com.zhisheng.common.utils.ExecutionEnvUtil;
 import com.zhisheng.common.utils.GsonUtil;
 import com.zhisheng.common.utils.KafkaConfigUtil;
@@ -11,16 +10,14 @@ import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
-
 import java.util.Properties;
-
 import static com.zhisheng.common.constant.PropertiesConstants.METRICS_TOPIC;
 
 /**
  * blog：http://www.54tianzhisheng.cn/
- * 微信公众号：zhisheng
  */
 public class Main {
+
     public static void main(String[] args) throws Exception{
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         ParameterTool parameterTool = ExecutionEnvUtil.PARAMETER_TOOL;

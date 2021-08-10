@@ -30,10 +30,7 @@ public class Main {
             public void cancel() {
 
             }
-        })
-                .map((MapFunction<Long, Long>) aLong -> aLong / 1000).setParallelism(3)
-                .print();
-
+        }).map((MapFunction<Long, Long>) aLong -> aLong / 1000).setParallelism(3).print();
         env.execute("zhisheng RestartStrategy example");
     }
 }

@@ -9,10 +9,9 @@ import java.util.Properties;
 
 /**
  * Desc: 往kafka中写数据,可以使用这个main函数进行测试
- * Created by zhisheng on 2019-02-17
- * Blog: http://www.54tianzhisheng.cn/tags/Flink/
  */
 public class KafkaUtil {
+
     public static final String broker_list = "localhost:9092";
     public static final String topic = "student";  //kafka topic 需要和 flink 程序用同一个 topic
 

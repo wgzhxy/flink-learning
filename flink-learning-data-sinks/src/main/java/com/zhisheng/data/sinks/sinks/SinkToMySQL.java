@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
  */
 @Slf4j
 public class SinkToMySQL extends RichSinkFunction<Student> {
+
     PreparedStatement ps;
     private Connection connection;
 
@@ -72,7 +73,10 @@ public class SinkToMySQL extends RichSinkFunction<Student> {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             //注意，替换成自己本地的 mysql 数据库地址和用户名、密码
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8", "root", "root123456");
+            con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8",
+                    "root",
+                    "root123456");
         } catch (Exception e) {
             log.error("-----------mysql get connection has exception , msg = {}", e.getMessage());
         }

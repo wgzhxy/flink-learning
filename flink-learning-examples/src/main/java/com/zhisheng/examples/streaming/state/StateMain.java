@@ -36,26 +36,24 @@ public class StateMain {
             public void cancel() {
 
             }
-        }).keyBy(0)
-                .map(new RichMapFunction<Tuple2<String, Long>, Tuple2<String, Long>>() {
+        }).keyBy(0).map(new RichMapFunction<Tuple2<String, Long>, Tuple2<String, Long>>() {
 
-                    private ValueState<Long> state;
+            private ValueState<Long> state;
 
-                    @Override
-                    public void open(Configuration parameters) throws Exception {
-                        super.open(parameters);
-                        state = getRuntimeContext().getState(
-                                new ValueStateDescriptor<>("uvState",
-                                        TypeInformation.of(new TypeHint<Long>() {
-                                        })));
-                    }
+            @Override
+            public void open(Configuration parameters) throws Exception {
+                super.open(parameters);
+                state = getRuntimeContext().getState(
+                        new ValueStateDescriptor<>("uvState", TypeInformation.of(new TypeHint<Long>() {
+                        })));
+            }
 
-                    @Override
-                    public Tuple2<String, Long> map(Tuple2<String, Long> tuple2) throws Exception {
-                        state.update(tuple2.f1);
-                        return tuple2;
-                    }
-                }).print();
+            @Override
+            public Tuple2<String, Long> map(Tuple2<String, Long> tuple2) throws Exception {
+                state.update(tuple2.f1);
+                return tuple2;
+            }
+        }).print();
 
         env.execute();
     }

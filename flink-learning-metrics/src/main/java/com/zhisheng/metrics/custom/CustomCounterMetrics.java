@@ -16,11 +16,12 @@ import org.apache.flink.streaming.api.functions.source.SourceFunction;
  */
 public class CustomCounterMetrics {
     public static void main(String[] args) throws Exception {
+
         //创建流运行环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.getConfig().setGlobalJobParameters(ParameterTool.fromArgs(args));
 
-        env.addSource(new SourceFunction<String>() {
+        SourceFunction sourceFunction = new SourceFunction<String>() {
 
             private volatile boolean isRunning = true;
 
@@ -36,7 +37,9 @@ public class CustomCounterMetrics {
             public void cancel() {
                 isRunning = false;
             }
-        }).map(new RichMapFunction<String, String>() {
+        };
+
+        env.addSource(sourceFunction).map(new RichMapFunction<String, String>() {
             Counter counter1;
             Counter counter2;
             Counter counter3;
@@ -68,7 +71,6 @@ public class CustomCounterMetrics {
                 return s;
             }
         }).print();
-
 
         env.execute("Flink custom Counter Metrics");
     }

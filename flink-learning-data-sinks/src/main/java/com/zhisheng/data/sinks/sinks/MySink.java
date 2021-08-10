@@ -10,6 +10,7 @@ import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
  * 微信公众号：zhisheng
  */
 public class MySink extends RichSinkFunction<String> {
+
     private String tx;
 
     public MySink(String tx) {

@@ -6,12 +6,9 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 /**
  * Desc: test RichSink function construction method and open function
- * https://t.zsxq.com/EIiyjeU
- * Created by zhisheng on 2019-09-26
- * blog：http://www.54tianzhisheng.cn/
- * 微信公众号：zhisheng
  */
 public class Main2 {
+
     public static void main(String[] args) throws Exception {
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
